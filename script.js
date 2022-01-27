@@ -97,7 +97,52 @@
 // greet('Hello')('Isaac');
 
 // Challenge
+// const greetArr = greeting => name => console.log(`${greeting}${name}`);
 
-const greetArr = greeting => name => console.log(`${greeting}${name}`);
+// greetArr('Hello ')('Isaac');
 
-greetArr('Hello ')('Isaac');
+const lufthansa = {
+  airline: 'Lufhansa',
+  iataCode: 'LH',
+  bookings: [],
+  book(flightNum, name) {
+    console.log(
+      `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
+    );
+    this.bookings.push({ flight: `${this.iataCode}${flightNum}`, name });
+  },
+};
+
+lufthansa.book(239, 'Isaac Rendon');
+lufthansa.book(635, 'John Smith');
+console.log(lufthansa);
+
+const eurowings = {
+  name: 'Eurowings',
+  iataCode: 'EW',
+  bookings: [],
+};
+
+const book = lufthansa.book;
+
+// Does not work
+// book(23, 'Sarah Williams');
+
+book.call(eurowings, 23, 'Sarah Williams');
+console.log(eurowings);
+
+const swiss = {
+  airline: 'Swiss Air Lines',
+  iataCode: 'LX',
+  bookings: [],
+};
+
+book.call(swiss, 584, 'Joey Shakes');
+console.log(swiss);
+
+//Apply method
+const flightData = [582, 'George Cooper'];
+book.apply(swiss, flightData);
+console.log(swiss);
+
+book.call(swiss, ...flightData);
