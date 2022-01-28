@@ -304,24 +304,41 @@
 // // 4. Run the 'displayResults' method at the end of each 'registerNewAnswer' method call.
 // // poll.displayResults();
 
-const runOnce = function () {
-  console.log('This will never run again');
+// const runOnce = function () {
+//   console.log('This will never run again');
+// };
+
+// runOnce();
+
+// // IIFE
+// (function () {
+//   console.log('This will never run again');
+//   const isPrivate = 23;
+// })();
+
+// (() => console.log('This will never run again'))();
+
+// {
+//   const isPrivate = 23;
+//   var isNotPrivate = 46;
+// }
+
+// // console.log(isPrivate);
+// console.log(isNotPrivate);
+
+const secureBooking = function () {
+  let passangerCount = 0;
+
+  return function () {
+    passangerCount++;
+    console.log(`${passangerCount} passangers`);
+  };
 };
 
-runOnce();
+const booker = secureBooking();
 
-// IIFE
-(function () {
-  console.log('This will never run again');
-  const isPrivate = 23;
-})();
+booker();
+booker();
+booker();
 
-(() => console.log('This will never run again'))();
-
-{
-  const isPrivate = 23;
-  var isNotPrivate = 46;
-}
-
-// console.log(isPrivate);
-console.log(isNotPrivate);
+console.dir(booker);
