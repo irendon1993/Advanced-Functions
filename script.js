@@ -292,93 +292,118 @@
 // //  This should be the default option.
 // // If type is 'string', display a string like "Poll results are 13, 2, 4, 1".
 
-// poll.displayResults = function (type = 'array') {
-//   type = prompt('Array or String?');
-//   if (type.toLocaleLowerCase() === 'array') {
-//     console.log(this.answers);
-//   } else if (type.toLowerCase() === 'string') {
-//     // let [...pollResults] = this.answers;
-//     console.log(`Poll results are ${this.awnsers.join(', ')}`);
-//   }
-// };
-// // 4. Run the 'displayResults' method at the end of each 'registerNewAnswer' method call.
-// // // poll.displayResults();
+// // poll.displayResults = function (type = 'array') {
+// //   type = prompt('Array or String?');
+// //   if (type.toLocaleLowerCase() === 'array') {
+// //     console.log(this.answers);
+// //   } else if (type.toLowerCase() === 'string') {
+// //     // let [...pollResults] = this.answers;
+// //     console.log(`Poll results are ${this.awnsers.join(', ')}`);
+// //   }
+// // };
+// // // 4. Run the 'displayResults' method at the end of each 'registerNewAnswer' method call.
+// // // // poll.displayResults();
 
-// // const runOnce = function () {
-// //   console.log('This will never run again');
+// // // const runOnce = function () {
+// // //   console.log('This will never run again');
+// // // };
+
+// // // runOnce();
+
+// // // // IIFE
+// // // (function () {
+// // //   console.log('This will never run again');
+// // //   const isPrivate = 23;
+// // // })();
+
+// // // (() => console.log('This will never run again'))();
+
+// // // {
+// // //   const isPrivate = 23;
+// // //   var isNotPrivate = 46;
+// // // }
+
+// // // // console.log(isPrivate);
+// // // console.log(isNotPrivate);
+
+// // const secureBooking = function () {
+// //   let passangerCount = 0;
+
+// //   return function () {
+// //     passangerCount++;
+// //     console.log(`${passangerCount} passangers`);
+// //   };
 // // };
 
-// // runOnce();
+// // const booker = secureBooking();
 
-// // // IIFE
-// // (function () {
-// //   console.log('This will never run again');
-// //   const isPrivate = 23;
-// // })();
+// // booker();
+// // booker();
+// // booker();
 
-// // (() => console.log('This will never run again'))();
+// // console.dir(booker);
 
-// // {
-// //   const isPrivate = 23;
-// //   var isNotPrivate = 46;
-// // }
+// let f;
 
-// // // console.log(isPrivate);
-// // console.log(isNotPrivate);
-
-// const secureBooking = function () {
-//   let passangerCount = 0;
-
-//   return function () {
-//     passangerCount++;
-//     console.log(`${passangerCount} passangers`);
+// const g = function () {
+//   const a = 23;
+//   f = function () {
+//     console.log(a * 2);
 //   };
 // };
 
-// const booker = secureBooking();
+// const h = function () {
+//   const b = 777;
+//   f = function () {
+//     console.log(b * 2);
+//   };
+// };
 
-// booker();
-// booker();
-// booker();
+// g();
+// f();
+// console.dir(f);
 
-// console.dir(booker);
+// // Re-assigning f function
+// h();
+// f();
+// console.dir(f);
 
-let f;
+// // Example 2
+// const boardPassengers = function (n, wait) {
+//   const pergroup = n / 3;
 
-const g = function () {
-  const a = 23;
-  f = function () {
-    console.log(a * 2);
-  };
-};
+//   setTimeout(function () {
+//     console.log(`We are now boarding all ${n} passengers`);
+//     console.log(`There are 3 group, wach with ${pergroup} passengers.`);
+//   }, wait * 1000);
 
-const h = function () {
-  const b = 777;
-  f = function () {
-    console.log(b * 2);
-  };
-};
+//   console.log(`Will start boarding in ${wait} seconds`);
+// };
 
-g();
-f();
-console.dir(f);
+// // const pergroup = 1000;
+// boardPassengers(180, 3);
 
-// Re-assigning f function
-h();
-f();
-console.dir(f);
+///////////////////////////////////////
+// Coding Challenge #2
 
-// Example 2
-const boardPassengers = function (n, wait) {
-  const pergroup = n / 3;
+/* 
+This is more of a thinking challenge than a coding challenge 🤓
 
-  setTimeout(function () {
-    console.log(`We are now boarding all ${n} passengers`);
-    console.log(`There are 3 group, wach with ${pergroup} passengers.`);
-  }, wait * 1000);
+Take the IIFE below and at the end of the function, 
+attach an event listener that changes the color of the selected h1 element ('header') to blue, each time the BODY element is clicked. 
+Do NOT select the h1 element again!
 
-  console.log(`Will start boarding in ${wait} seconds`);
-};
+And now explain to YOURSELF (or someone around you) WHY this worked!
+ Take all the time you need. Think about WHEN exactly the callback function is executed, 
+ and what that means for the variables involved in this example.
 
-// const pergroup = 1000;
-boardPassengers(180, 3);
+GOOD LUCK 😀
+*/
+
+(function () {
+  const header = document.querySelector('h1');
+  header.style.color = 'red';
+  document.querySelector('body').addEventListener('click', function () {
+    header.style.color = 'blue';
+  });
+})();
