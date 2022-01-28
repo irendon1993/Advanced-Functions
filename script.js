@@ -302,43 +302,83 @@
 //   }
 // };
 // // 4. Run the 'displayResults' method at the end of each 'registerNewAnswer' method call.
-// // poll.displayResults();
+// // // poll.displayResults();
 
-// const runOnce = function () {
-//   console.log('This will never run again');
+// // const runOnce = function () {
+// //   console.log('This will never run again');
+// // };
+
+// // runOnce();
+
+// // // IIFE
+// // (function () {
+// //   console.log('This will never run again');
+// //   const isPrivate = 23;
+// // })();
+
+// // (() => console.log('This will never run again'))();
+
+// // {
+// //   const isPrivate = 23;
+// //   var isNotPrivate = 46;
+// // }
+
+// // // console.log(isPrivate);
+// // console.log(isNotPrivate);
+
+// const secureBooking = function () {
+//   let passangerCount = 0;
+
+//   return function () {
+//     passangerCount++;
+//     console.log(`${passangerCount} passangers`);
+//   };
 // };
 
-// runOnce();
+// const booker = secureBooking();
 
-// // IIFE
-// (function () {
-//   console.log('This will never run again');
-//   const isPrivate = 23;
-// })();
+// booker();
+// booker();
+// booker();
 
-// (() => console.log('This will never run again'))();
+// console.dir(booker);
 
-// {
-//   const isPrivate = 23;
-//   var isNotPrivate = 46;
-// }
+let f;
 
-// // console.log(isPrivate);
-// console.log(isNotPrivate);
-
-const secureBooking = function () {
-  let passangerCount = 0;
-
-  return function () {
-    passangerCount++;
-    console.log(`${passangerCount} passangers`);
+const g = function () {
+  const a = 23;
+  f = function () {
+    console.log(a * 2);
   };
 };
 
-const booker = secureBooking();
+const h = function () {
+  const b = 777;
+  f = function () {
+    console.log(b * 2);
+  };
+};
 
-booker();
-booker();
-booker();
+g();
+f();
+console.dir(f);
 
-console.dir(booker);
+// Re-assigning f function
+h();
+f();
+console.dir(f);
+
+// Example 2
+const boardPassengers = function (n, wait) {
+  const pergroup = n / 3;
+
+  setTimeout(function () {
+    console.log(`We are now boarding all ${n} passengers`);
+    console.log(`There are 3 group, wach with ${pergroup} passengers.`);
+  }, wait * 1000);
+
+  console.log(`Will start boarding in ${wait} seconds`);
+};
+
+// const pergroup = 1000;
+boardPassengers(180, 3);
